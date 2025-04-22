@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro - Maquininha</title>
+  <style>
+    body {
+      background-color: #010729;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .form-container {
+      background-color: #1a3950;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(161, 219, 0, 0.5);
+      max-width: 600px;
+      width: 100%;
+    }
+    h2 {
+      color: #a1db00;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      margin-bottom: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 1rem;
+      background-color: #a1db00;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #6e862d;
+    }
+    .maquininha-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+    .maquininha-option input {
+      margin-right: 10px;
+    }
+    .maquininha-option img {
+      width: 60px;
+      height: auto;
+      border-radius: 10px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Cadastro para Maquininha</h2>
+    <form id="cadastro-form">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="Email" required />
+
+      <label for="cpf">CPF</label>
+      <input type="text" id="cpf" name="CPF" required />
+
+      <label for="nascimento">Data de nascimento</label>
+      <input type="date" id="nascimento" name="Data de nascimento" required />
+
+      <label for="celular">Celular</label>
+      <input type="tel" id="celular" name="Celular" required />
+
+      <label for="endereco">Nome da rua e número</label>
+      <input type="text" id="endereco" name="Nome da rua e número" required />
+
+      <label for="bairro">Bairro</label>
+      <input type="text" id="bairro" name="Bairro" required />
+
+      <label for="cep">CEP</label>
+      <input type="text" id="cep" name="CEP" required />
+
+      <label for="plano">Escolha seu plano</label>
+      <select id="plano" name="Plano" required>
+        <option value="Pag Pro">Pag Pro - Para você que só precisa do débito e crédito à vista!</option>
+        <option value="Pag Super">Pag Super - Para você que quer garantir taxa baixa!</option>
+        <option value="Pag Lucro">Pag Lucro - Para empresas que vendem acima R$5.000,00 no cartão!</option>
+      </select>
+
+      <label>Qual a maquininha?</label>
+      <div class="maquininha-option">
+        <input type="radio" name="Maquininha" value="PAGMINIZINHA" required />
+        <img src="minizinha NFC 2 sem logo.png" alt="PAGMINIZINHA" /> PAGMINIZINHA
+      </div>
+      <div class="maquininha-option">
+        <input type="radio" name="Maquininha" value="PAGMINI" />
+        <img src="minizinha chip 3 sem logo.png" alt="PAGMINI" /> PAGMINI
+      </div>
+      <div class="maquininha-option">
+        <input type="radio" name="Maquininha" value="PAGPLUS" />
+        <img src="moderninha plus 2 sem logo.png" alt="PAGPLUS" /> PAGPLUS
+      </div>
+      <div class="maquininha-option">
+        <input type="radio" name="Maquininha" value="PAGPRO" />
+        <img src="moderninha pro 2 sem logo.png" alt="PAGPRO" /> PAGPRO
+      </div>
+      <div class="maquininha-option">
+        <input type="radio" name="Maquininha" value="PAGSMART" />
+        <img src="moderninha smart 2 sem logo.png" alt="PAGSMART" /> PAGSMART
+      </div>
+
+      <label for="pagamento">Forma de pagamento</label>
+      <select id="pagamento" name="Forma de pagamento" required>
+        <option value="Pix">Pix</option>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão">Cartão</option>
+      </select>
+
+      <button type="submit">Enviar Cadastro</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("cadastro-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => (data[key] = value));
+
+      fetch("https://script.google.com/macros/s/AKfycbx3CtepwX80rjhl91-KACSFKhaCBC7Q5hEZ7X3CpCT-CfPyT0Sz6AMVaGdC6dr1Ta9H/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then(() => alert("Cadastro enviado com sucesso!"))
+        .catch(() => alert("Erro ao enviar cadastro."));
+    });
+  </script>
+</body>
+</html>
