@@ -1,26 +1,91 @@
-<script>
-  document.getElementById("cadastro-form").addEventListener("submit", function (e) {
-    e.preventDefault();
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário Maquininha</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #010729;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
 
-    const formData = new FormData(this);
-    const data = {};
-    formData.forEach((value, key) => (data[key] = value));
+    header {
+      background-color: #1a3950;
+      padding: 20px;
+      text-align: center;
+    }
 
-    fetch("https://script.google.com/macros/s/AKfycbx3CtepwX80rjhl91-KACSFKhaCBC7Q5hEZ7X3CpCT-CfPyT0Sz6AMVaGdC6dr1Ta9H/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then(response => response.text())
-      .then(text => {
-        console.log("Resposta do servidor:", text);
-        alert("Cadastro enviado com sucesso!");
-      })
-      .catch(error => {
-        console.error("Erro ao enviar cadastro:", error);
-        alert("Erro ao enviar cadastro. Verifique o console para mais detalhes.");
-      });
-  });
-</script>
+    h1 {
+      margin: 0;
+      color: #a1db00;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px 20px;
+      background-color: #000000;
+    }
+
+    .card {
+      background-color: #213f55;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      width: 200px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .card h3 {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #a1db00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Conheça Nossas Maquininhas</h1>
+  </header>
+
+  <section class="gallery">
+    <div class="card">
+      <img src="pagminizinha.png" alt="PagMinizinha">
+      <h3>Minizinha</h3>
+    </div>
+    <div class="card">
+      <img src="pagmini.png" alt="PagMini">
+      <h3>Mini</h3>
+    </div>
+    <div class="card">
+      <img src="pagplus.png" alt="PagPlus">
+      <h3>PagPlus</h3>
+    </div>
+    <div class="card">
+      <img src="pagpro.png" alt="PagPro">
+      <h3>PagPro</h3>
+    </div>
+    <div class="card">
+      <img src="pagsmart.png" alt="PagSmart">
+      <h3>PagSmart</h3>
+    </div>
+  </section>
+</body>
+</html>
