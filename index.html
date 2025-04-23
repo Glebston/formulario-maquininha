@@ -71,7 +71,6 @@
       margin-right: 10px;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
 </head>
 <body>
   <div class="form-container">
@@ -81,13 +80,13 @@
       <input type="email" id="email" name="Email" required />
 
       <label for="cpf">CPF</label>
-      <input type="text" id="cpf" name="CPF" required />
+      <input type="text" id="cpf" name="CPF" data-inputmask="'mask': '999.999.999-99'" required />
 
       <label for="nascimento">Data de nascimento</label>
       <input type="date" id="nascimento" name="Data de nascimento" required />
 
       <label for="celular">Celular</label>
-      <input type="tel" id="celular" name="Celular" required />
+      <input type="text" id="celular" name="Celular" data-inputmask="'mask': '(99) 99999-9999'" required />
 
       <label for="endereco">Nome da rua e número</label>
       <input type="text" id="endereco" name="Nome da rua e número" required />
@@ -96,7 +95,7 @@
       <input type="text" id="bairro" name="Bairro" required />
 
       <label for="cep">CEP</label>
-      <input type="text" id="cep" name="CEP" required />
+      <input type="text" id="cep" name="CEP" data-inputmask="'mask': '99999-999'" required />
 
       <label for="plano">Escolha seu plano</label>
       <select id="plano" name="Plano" required>
@@ -138,13 +137,17 @@
     </form>
   </div>
 
-  <script>
-    // Aplicar máscaras
-    Inputmask({"mask": "999.999.999-99"}).mask("#cpf");
-    Inputmask({"mask": "(99) 99999-9999"}).mask("#celular");
-    Inputmask({"mask": "99999-999"}).mask("#cep");
+  <!-- Inputmask -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/bindings/inputmask.binding.min.js"></script>
 
-    // Envio para Google Apps Script
+  <script>
+    // Ativando as máscaras após o carregamento da página
+    window.addEventListener("DOMContentLoaded", function () {
+      Inputmask().mask(document.querySelectorAll("input"));
+    });
+
+    // Envio do formulário
     document.getElementById("cadastro-form").addEventListener("submit", function (e) {
       e.preventDefault();
 
