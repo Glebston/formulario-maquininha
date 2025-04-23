@@ -60,9 +60,6 @@
       align-items: center;
       margin-bottom: 1rem;
       cursor: pointer;
-      background-color: #213f55;
-      padding: 0.5rem;
-      border-radius: 10px;
     }
     .maquininha-option input {
       margin-right: 10px;
@@ -74,6 +71,7 @@
       margin-right: 10px;
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
 </head>
 <body>
   <div class="form-container">
@@ -141,6 +139,12 @@
   </div>
 
   <script>
+    // Aplicar máscaras
+    Inputmask({"mask": "999.999.999-99"}).mask("#cpf");
+    Inputmask({"mask": "(99) 99999-9999"}).mask("#celular");
+    Inputmask({"mask": "99999-999"}).mask("#cep");
+
+    // Envio para Google Apps Script
     document.getElementById("cadastro-form").addEventListener("submit", function (e) {
       e.preventDefault();
 
