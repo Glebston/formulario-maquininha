@@ -147,14 +147,21 @@
 
       fetch("https://script.google.com/macros/s/AKfycbx3CtepwX80rjhl91-KACSFKhaCBC7Q5hEZ7X3CpCT-CfPyT0Sz6AMVaGdC6dr1Ta9H/exec", {
         method: "POST",
-        mode: "no-cors",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       })
-        .then(() => alert("Cadastro enviado com sucesso!"))
-        .catch(() => alert("Erro ao enviar cadastro."));
+      .then(response => {
+        if (response.ok) {
+          alert("Cadastro enviado com sucesso!");
+        } else {
+          alert("Erro ao enviar: " + response.status);
+        }
+      })
+      .catch(error => {
+        alert("Erro de conexão: " + error.message);
+      });
     });
   </script>
 </body>
