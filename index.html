@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro - Maquininha</title>
   <style>
     body {
@@ -32,14 +32,14 @@
       display: block;
       margin: 1rem 0 0.5rem;
     }
-    input,
-    select {
+    input, select {
       width: 100%;
       padding: 0.7rem;
       border-radius: 10px;
       border: none;
       outline: none;
       margin-bottom: 1rem;
+      font-size: 1rem;
     }
     button {
       width: 100%;
@@ -83,7 +83,7 @@
       <input type="text" id="cpf" name="CPF" required />
 
       <label for="nascimento">Data de nascimento</label>
-      <input type="text" id="nascimento" name="Data de nascimento" required />
+      <input type="text" id="nascimento" name="Data de nascimento" required placeholder="dd/mm/aaaa"/>
 
       <label for="celular">Celular</label>
       <input type="text" id="celular" name="Celular" required />
@@ -99,9 +99,9 @@
 
       <label for="plano">Escolha seu plano</label>
       <select id="plano" name="Plano" required>
-        <option value="Pag Pro">Pag Pro - Para você que só precisa do débito e crédito à vista!</option>
-        <option value="Pag Super">Pag Super - Para você que quer garantir taxa baixa!</option>
-        <option value="Pag Lucro">Pag Lucro - Para empresas que vendem acima R$5.000,00 no cartão!</option>
+        <option value="Pag Pro">Pag Pro – Para você que só precisa do débito e crédito à vista</option>
+        <option value="Pag Super">Pag Super – Para você que quer garantir taxa baixa</option>
+        <option value="Pag Lucro">Pag Lucro – Para empresas que vendem acima de R$5.000 no cartão</option>
       </select>
 
       <label>Qual a maquininha?</label>
@@ -137,24 +137,18 @@
     </form>
   </div>
 
-  <!-- Inputmask CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
+  <!-- Inputmask via JSDelivr com suporte completo -->
+  <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
   <script>
-    const masks = {
-      cpf: '999.999.999-99',
-      celular: '(99) 9 9999-9999',
-      nascimento: '99/99/9999',
-      cep: '99999-999'
+    window.onload = function () {
+      Inputmask({"mask": "999.999.999-99"}).mask("#cpf");
+      Inputmask({"mask": "(99) 99999-9999"}).mask("#celular");
+      Inputmask({"mask": "99/99/9999"}).mask("#nascimento");
+      Inputmask({"mask": "99999-999"}).mask("#cep");
     };
-
-    Inputmask(masks.cpf).mask(document.getElementById("cpf"));
-    Inputmask(masks.celular).mask(document.getElementById("celular"));
-    Inputmask(masks.nascimento).mask(document.getElementById("nascimento"));
-    Inputmask(masks.cep).mask(document.getElementById("cep"));
 
     document.getElementById("cadastro-form").addEventListener("submit", function (e) {
       e.preventDefault();
-
       const formData = new FormData(this);
       const data = {};
       formData.forEach((value, key) => (data[key] = value));
@@ -167,8 +161,8 @@
         },
         body: JSON.stringify(data),
       })
-        .then(() => alert("Cadastro enviado com sucesso!"))
-        .catch(() => alert("Erro ao enviar cadastro."));
+      .then(() => alert("Cadastro enviado com sucesso!"))
+      .catch(() => alert("Erro ao enviar cadastro."));
     });
   </script>
 </body>
