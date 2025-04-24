@@ -47,15 +47,16 @@
       cursor: pointer;
     }
 
-    .maquininha-img {
-      width: 100px;
-      margin: 10px;
-    }
-
     .maquininhas {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      margin-top: 20px;
+    }
+
+    .maquininha-img {
+      width: 100px;
+      margin: 10px;
     }
   </style>
 </head>
@@ -139,10 +140,10 @@
 
       $('#tipoPessoa').on('change', function () {
         if (this.value === 'cnpj') {
-          $('#cnpjField').show();
+          $('#cnpjField').slideDown();
           $('#cnpj').prop('required', true);
         } else {
-          $('#cnpjField').hide();
+          $('#cnpjField').slideUp();
           $('#cnpj').prop('required', false);
         }
       });
@@ -166,6 +167,8 @@
           } else {
             alert('Erro ao enviar. Tente novamente.');
           }
+        }).catch(() => {
+          alert('Erro de conexão. Tente novamente.');
         });
       });
     });
