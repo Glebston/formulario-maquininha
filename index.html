@@ -2,50 +2,53 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro - Maquininha</title>
   <style>
     body {
       background-color: #010729;
       color: #fff;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      margin: 0;
     }
     .form-container {
-      background: #1a3950;
-      padding: 30px;
+      background-color: #1a3950;
+      padding: 2rem;
       border-radius: 20px;
-      box-shadow: 0 0 15px rgba(161, 219, 0, 0.6);
-      width: 100%;
+      box-shadow: 0 0 20px rgba(161, 219, 0, 0.5);
       max-width: 600px;
+      width: 100%;
     }
     h2 {
-      text-align: center;
       color: #a1db00;
-      margin-bottom: 20px;
+      text-align: center;
     }
     label {
       display: block;
-      margin-top: 15px;
+      margin: 1rem 0 0.5rem;
     }
-    input, select {
+    input,
+    select {
       width: 100%;
-      padding: 10px;
+      padding: 0.7rem;
       border-radius: 10px;
       border: none;
-      margin-top: 5px;
+      outline: none;
+      margin-bottom: 1rem;
     }
     button {
       width: 100%;
-      padding: 15px;
-      margin-top: 20px;
+      padding: 1rem;
       background-color: #a1db00;
+      color: #000;
       border: none;
       border-radius: 10px;
+      font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
     }
@@ -55,12 +58,17 @@
     .maquininha-option {
       display: flex;
       align-items: center;
-      margin-top: 10px;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+    .maquininha-option input {
+      margin-right: 10px;
     }
     .maquininha-option img {
-      width: 50px;
+      width: 60px;
+      height: auto;
+      border-radius: 10px;
       margin-right: 10px;
-      border-radius: 5px;
     }
   </style>
 </head>
@@ -68,91 +76,99 @@
   <div class="form-container">
     <h2>Cadastro para Maquininha</h2>
     <form id="cadastro-form">
-      <label>Email</label>
-      <input type="email" name="Email" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="Email" required />
 
-      <label>CPF</label>
-      <input type="text" name="CPF" id="cpf" required>
+      <label for="cpf">CPF</label>
+      <input type="text" id="cpf" name="CPF" required />
 
-      <label>Data de nascimento</label>
-      <input type="date" name="Data de nascimento" required>
+      <label for="nascimento">Data de nascimento</label>
+      <input type="text" id="nascimento" name="Data de nascimento" required />
 
-      <label>Celular</label>
-      <input type="text" name="Celular" id="celular" required>
+      <label for="celular">Celular</label>
+      <input type="text" id="celular" name="Celular" required />
 
-      <label>Nome da rua e número</label>
-      <input type="text" name="Nome da rua e número" required>
+      <label for="endereco">Nome da rua e número</label>
+      <input type="text" id="endereco" name="Nome da rua e número" required />
 
-      <label>Bairro</label>
-      <input type="text" name="Bairro" required>
+      <label for="bairro">Bairro</label>
+      <input type="text" id="bairro" name="Bairro" required />
 
-      <label>CEP</label>
-      <input type="text" name="CEP" id="cep" required>
+      <label for="cep">CEP</label>
+      <input type="text" id="cep" name="CEP" required />
 
-      <label>Plano</label>
-      <select name="Plano" required>
-        <option value="Pag Pro">Pag Pro</option>
-        <option value="Pag Super">Pag Super</option>
-        <option value="Pag Lucro">Pag Lucro</option>
+      <label for="plano">Escolha seu plano</label>
+      <select id="plano" name="Plano" required>
+        <option value="Pag Pro">Pag Pro - Para você que só precisa do débito e crédito à vista!</option>
+        <option value="Pag Super">Pag Super - Para você que quer garantir taxa baixa!</option>
+        <option value="Pag Lucro">Pag Lucro - Para empresas que vendem acima R$5.000,00 no cartão!</option>
       </select>
 
       <label>Qual a maquininha?</label>
       <div class="maquininha-option">
-        <input type="radio" name="Maquininha" value="PAGMINIZINHA" required>
-        <img src="pagminizinha.png" alt="PAGMINIZINHA"> PAGMINIZINHA
+        <input type="radio" name="Maquininha" value="PAGMINIZINHA" required />
+        <img src="pagminizinha.png" alt="PAGMINIZINHA" /> PAGMINIZINHA
       </div>
       <div class="maquininha-option">
-        <input type="radio" name="Maquininha" value="PAGMINI">
-        <img src="pagmini.png" alt="PAGMINI"> PAGMINI
+        <input type="radio" name="Maquininha" value="PAGMINI" />
+        <img src="pagmini.png" alt="PAGMINI" /> PAGMINI
       </div>
       <div class="maquininha-option">
-        <input type="radio" name="Maquininha" value="PAGPLUS">
-        <img src="pagplus.png" alt="PAGPLUS"> PAGPLUS
+        <input type="radio" name="Maquininha" value="PAGPLUS" />
+        <img src="pagplus.png" alt="PAGPLUS" /> PAGPLUS
       </div>
       <div class="maquininha-option">
-        <input type="radio" name="Maquininha" value="PAGPRO">
-        <img src="pagpro.png" alt="PAGPRO"> PAGPRO
+        <input type="radio" name="Maquininha" value="PAGPRO" />
+        <img src="pagpro.png" alt="PAGPRO" /> PAGPRO
       </div>
       <div class="maquininha-option">
-        <input type="radio" name="Maquininha" value="PAGSMART">
-        <img src="pagsmart.png" alt="PAGSMART"> PAGSMART
+        <input type="radio" name="Maquininha" value="PAGSMART" />
+        <img src="pagsmart.png" alt="PAGSMART" /> PAGSMART
       </div>
 
-      <label>Forma de pagamento</label>
-      <select name="Forma de pagamento" required>
+      <label for="pagamento">Forma de pagamento</label>
+      <select id="pagamento" name="Forma de pagamento" required>
         <option value="Pix">Pix</option>
         <option value="Dinheiro">Dinheiro</option>
         <option value="Cartão">Cartão</option>
       </select>
 
-      <button type="submit">Enviar</button>
+      <button type="submit">Enviar Cadastro</button>
     </form>
   </div>
 
-  <!-- Inputmask -->
+  <!-- Inputmask CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
   <script>
-    window.onload = function() {
-      Inputmask("999.999.999-99").mask(document.getElementById("cpf"));
-      Inputmask("(99) 99999-9999").mask(document.getElementById("celular"));
-      Inputmask("99999-999").mask(document.getElementById("cep"));
+    const masks = {
+      cpf: '999.999.999-99',
+      celular: '(99) 9 9999-9999',
+      nascimento: '99/99/9999',
+      cep: '99999-999'
     };
 
-    // Envio do formulário
-    document.getElementById("cadastro-form").addEventListener("submit", function(e) {
+    Inputmask(masks.cpf).mask(document.getElementById("cpf"));
+    Inputmask(masks.celular).mask(document.getElementById("celular"));
+    Inputmask(masks.nascimento).mask(document.getElementById("nascimento"));
+    Inputmask(masks.cep).mask(document.getElementById("cep"));
+
+    document.getElementById("cadastro-form").addEventListener("submit", function (e) {
       e.preventDefault();
+
       const formData = new FormData(this);
       const data = {};
-      formData.forEach((value, key) => data[key] = value);
+      formData.forEach((value, key) => (data[key] = value));
 
       fetch("https://script.google.com/macros/s/AKfycbx3CtepwX80rjhl91-KACSFKhaCBC7Q5hEZ7X3CpCT-CfPyT0Sz6AMVaGdC6dr1Ta9H/exec", {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       })
-      .then(() => alert("Cadastro enviado com sucesso!"))
-      .catch(() => alert("Erro ao enviar cadastro."));
+        .then(() => alert("Cadastro enviado com sucesso!"))
+        .catch(() => alert("Erro ao enviar cadastro."));
     });
   </script>
 </body>
