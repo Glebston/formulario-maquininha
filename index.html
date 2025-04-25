@@ -153,7 +153,7 @@
         const formData = {};
         $(this).serializeArray().forEach(item => formData[item.name] = item.value);
 
-        fetch('https://script.google.com/macros/s/AKfycbx3CtepwX80rjhl91-KACSFKhaCBC7Q5hEZ7X3CpCT-CfPyT0Sz6AMVaGdC6dr1Ta9H/exec', {
+       fetch('https://script.google.com/macros/s/AKfycbzztHgLMzBB9zDCs4POVIv6b2YA4u3B0waHsWh0xRyrTGI8Cp0XQCKro3-UrWlAB9nT/exec', {
           method: 'POST',
           body: JSON.stringify(formData),
           headers: {
