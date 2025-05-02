@@ -153,21 +153,16 @@
         const formData = {};
         $(this).serializeArray().forEach(item => formData[item.name] = item.value);
 
-        fetch('https://script.google.com/macros/s/AKfycbzztHgLMzBB9zDCs4POVIv6b2YA4u3B0waHsWh0xRyrTGI8Cp0XQCKro3-UrWlAB9nT/exec', {
-          method: 'POST',
-          mode: 'no-cors',
-          body: JSON.stringify(formData),
-          headers: { 'Content-Type': 'application/json' }
-        })
-        .then(() => {
-          alert('Cadastro enviado com sucesso!');
-          $('#cadastroForm')[0].reset();
-          $('#cnpjField').hide();
-        })
-        .catch(() => alert('Erro de conexão. Tente novamente.'));
-      });
-    });
-  </script>
-
-</body>
-</html>
+       fetch('https://script.google.com/macros/s/AKfycbzztHgLMzBB9zDCs4POVIv6b2YA4u3B0waHsWh0xRyrTGI8Cp0XQCKro3-UrWlAB9nT/exec', {
+  method: 'POST',
+  mode: 'no-cors',          // continua para não bloquear
+  body: new URLSearchParams(formData)  // envia como application/x-www-form-urlencoded
+})
+.then(() => {
+  alert('Cadastro enviado com sucesso!');
+  $('#cadastroForm')[0].reset();
+  $('#cnpjField').hide();
+})
+.catch(() => {
+  alert('Erro de conexão. Tente novamente.');
+});
