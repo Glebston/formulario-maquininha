@@ -15,7 +15,6 @@
       color: white;
       padding: 20px;
     }
-
     form {
       background-color: #1a3950;
       padding: 20px;
@@ -23,12 +22,10 @@
       max-width: 600px;
       margin: auto;
     }
-
     label {
       display: block;
       margin-top: 10px;
     }
-
     input, select {
       width: 100%;
       padding: 8px;
@@ -36,7 +33,6 @@
       border-radius: 5px;
       border: none;
     }
-
     button {
       background-color: #a1db00;
       color: #000;
@@ -46,14 +42,12 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     .maquininhas {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       margin-top: 20px;
     }
-
     .maquininha-img {
       width: 100px;
       margin: 10px;
@@ -64,8 +58,14 @@
 
   <h1>Cadastro de Maquininha</h1>
   <form id="cadastroForm">
+    <label for="nome">Nome Completo</label>
+    <input type="text" name="Nome Completo" id="nome" required>
+
+    <label for="profissao">Com o que você trabalha?</label>
+    <input type="text" name="Profissão" id="profissao" placeholder="Ex: Vendas, Serviços, Alimentação…" required>
+
     <label for="email">Email</label>
-    <input type="email" name="Email" required>
+    <input type="email" name="Email" id="email" required>
 
     <label for="tipoPessoa">Tipo de cadastro</label>
     <select id="tipoPessoa" name="TipoPessoa">
@@ -81,30 +81,30 @@
       <input type="text" name="CNPJ" id="cnpj">
     </div>
 
-    <label>Data de nascimento</label>
+    <label for="dataNascimento">Data de nascimento</label>
     <input type="text" name="Data de nascimento" id="dataNascimento">
 
-    <label>Celular</label>
+    <label for="celular">Celular</label>
     <input type="text" name="Celular" id="celular">
 
-    <label>Nome da rua e número</label>
-    <input type="text" name="Nome da rua e número">
+    <label for="endereco">Nome da rua e número</label>
+    <input type="text" name="Nome da rua e número" id="endereco">
 
-    <label>Bairro</label>
-    <input type="text" name="Bairro">
+    <label for="bairro">Bairro</label>
+    <input type="text" name="Bairro" id="bairro">
 
-    <label>CEP</label>
+    <label for="cep">CEP</label>
     <input type="text" name="CEP" id="cep">
 
-    <label>Plano</label>
-    <select name="Plano">
+    <label for="plano">Plano</label>
+    <select name="Plano" id="plano">
       <option>Pag Pro</option>
       <option>Pag Super</option>
       <option>Pag Lucro</option>
     </select>
 
-    <label>Tipo de maquininha</label>
-    <select name="Maquininha">
+    <label for="maquininha">Tipo de maquininha</label>
+    <select name="Maquininha" id="maquininha">
       <option>PagMinizinha</option>
       <option>PagMini</option>
       <option>PagPlus</option>
@@ -112,8 +112,8 @@
       <option>PagSmart</option>
     </select>
 
-    <label>Forma de pagamento</label>
-    <select name="Forma de pagamento">
+    <label for="formaPagamento">Forma de pagamento</label>
+    <select name="Forma de pagamento" id="formaPagamento">
       <option>Dinheiro</option>
       <option>Pix</option>
       <option>Cartão</option>
@@ -130,50 +130,44 @@
     <img src="pagsmart.png" alt="PagSmart" class="maquininha-img">
   </div>
 
- <script>
-  $(document).ready(function () {
-    $('#cpf').inputmask('999.999.999-99');
-    $('#cnpj').inputmask('99.999.999/9999-99');
-    $('#dataNascimento').inputmask('99/99/9999');
-    $('#celular').inputmask('(99) 99999-9999');
-    $('#cep').inputmask('99999-999');
+  <script>
+    $(document).ready(function () {
+      $('#cpf').inputmask('999.999.999-99');
+      $('#cnpj').inputmask('99.999.999/9999-99');
+      $('#dataNascimento').inputmask('99/99/9999');
+      $('#celular').inputmask('(99) 99999-9999');
+      $('#cep').inputmask('99999-999');
 
-    $('#tipoPessoa').on('change', function () {
-      if (this.value === 'cnpj') {
-        $('#cnpjField').slideDown();
-        $('#cnpj').prop('required', true);
-      } else {
-        $('#cnpjField').slideUp();
-        $('#cnpj').prop('required', false);
-      }
-    });
-
-    $('#cadastroForm').on('submit', function (e) {
-      e.preventDefault();
-
-      const formData = {};
-      $(this).serializeArray().forEach(item => formData[item.name] = item.value);
-
-      fetch('https://script.google.com/macros/s/AKfycbzztHgLMzBB9zDCs4POVIv6b2YA4u3B0waHsWh0xRyrTGI8Cp0XQCKro3-UrWlAB9nT/exec', {
-        method: 'POST',
-        mode: 'no-cors',  // ← aqui
-        body: JSON.stringify(formData),
-        headers: {
-          'Content-Type': 'application/json'
+      $('#tipoPessoa').on('change', function () {
+        if (this.value === 'cnpj') {
+          $('#cnpjField').slideDown();
+          $('#cnpj').prop('required', true);
+        } else {
+          $('#cnpjField').slideUp();
+          $('#cnpj').prop('required', false);
         }
-      })
-      .then(() => {
-        alert('Cadastro enviado com sucesso!');
-        $('#cadastroForm')[0].reset();
-        $('#cnpjField').hide();
-      })
-      .catch(() => {
-        alert('Erro de conexão. Tente novamente.');
       });
 
+      $('#cadastroForm').on('submit', function (e) {
+        e.preventDefault();
+        const formData = {};
+        $(this).serializeArray().forEach(item => formData[item.name] = item.value);
+
+        fetch('https://script.google.com/macros/s/AKfycbzztHgLMzBB9zDCs4POVIv6b2YA4u3B0waHsWh0xRyrTGI8Cp0XQCKro3-UrWlAB9nT/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify(formData),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(() => {
+          alert('Cadastro enviado com sucesso!');
+          $('#cadastroForm')[0].reset();
+          $('#cnpjField').hide();
+        })
+        .catch(() => alert('Erro de conexão. Tente novamente.'));
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>
