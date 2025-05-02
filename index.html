@@ -1,110 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro Maquininha</title>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
-
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #010729;
-      color: white;
-      padding: 20px;
-    }
-    form {
-      background-color: #1a3950;
-      padding: 20px;
-      border-radius: 15px;
-      max-width: 600px;
-      margin: auto;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-    }
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: none;
-    }
-    button {
-      background-color: #a1db00;
-      color: #000;
-      padding: 10px 15px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .maquininhas {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    .maquininha-img {
-      width: 100px;
-      margin: 10px;
-    }
+    body { font-family: Arial; background: #010729; color: #fff; padding: 20px; }
+    form { background: #1a3950; padding: 20px; border-radius: 15px; max-width:600px; margin:auto; }
+    label { display:block; margin-top:10px; }
+    input, select, button { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:none; box-sizing:border-box; }
+    button { background:#a1db00; color:#000; cursor:pointer; margin-top:15px; }
   </style>
 </head>
 <body>
-
   <h1>Cadastro de Maquininha</h1>
-  <form id="cadastroForm">
-    <label for="nome">Nome Completo</label>
-    <input type="text" name="Nome Completo" id="nome" required>
 
-    <label for="profissao">Com o que você trabalha?</label>
-    <input type="text" name="Profissão" id="profissao" placeholder="Ex: Vendas, Serviços, Alimentação…" required>
+  <!-- Iframe oculto para capturar a resposta do POST -->
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
 
-    <label for="email">Email</label>
-    <input type="email" name="Email" id="email" required>
+  <form id="cadastroForm"
+        action="https://script.google.com/macros/s/AKfycbzztHgLMzBB9zDCs4POVIv6b2YA4u3B0waHsWh0xRyrTGI8Cp0XQCKro3-UrWlAB9nT/exec"
+        method="post"
+        target="hidden_iframe">
+    
+    <label>Nome completo</label>
+    <input type="text" name="Nome completo" required>
 
-    <label for="tipoPessoa">Tipo de cadastro</label>
-    <select id="tipoPessoa" name="TipoPessoa">
-      <option value="cpf">CPF</option>
-      <option value="cnpj">CNPJ</option>
+    <label>Tipo de Cadastro</label>
+    <select name="Tipo de Cadastro">
+      <option>CPF</option>
+      <option>CNPJ</option>
     </select>
 
-    <label for="cpf">CPF</label>
+    <label>CPF</label>
     <input type="text" name="CPF" id="cpf" required>
 
-    <div id="cnpjField" style="display: none;">
-      <label for="cnpj">CNPJ</label>
-      <input type="text" name="CNPJ" id="cnpj">
-    </div>
+    <label>CNPJ</label>
+    <input type="text" name="CNPJ" id="cnpj">
 
-    <label for="dataNascimento">Data de nascimento</label>
-    <input type="text" name="Data de nascimento" id="dataNascimento">
+    <label>Data de Nascimento</label>
+    <input type="text" name="Data de Nascimento" id="dataNascimento">
 
-    <label for="celular">Celular</label>
+    <label>Celular</label>
     <input type="text" name="Celular" id="celular">
 
-    <label for="endereco">Nome da rua e número</label>
-    <input type="text" name="Nome da rua e número" id="endereco">
+    <label>Email</label>
+    <input type="email" name="Email" required>
 
-    <label for="bairro">Bairro</label>
-    <input type="text" name="Bairro" id="bairro">
+    <label>Com o que você trabalha</label>
+    <input type="text" name="Com o que você trabalha" required>
 
-    <label for="cep">CEP</label>
+    <label>Nome da rua e nº</label>
+    <input type="text" name="Nome da rua e nº">
+
+    <label>Bairro</label>
+    <input type="text" name="Bairro">
+
+    <label>CEP</label>
     <input type="text" name="CEP" id="cep">
 
-    <label for="plano">Plano</label>
-    <select name="Plano" id="plano">
+    <label>Plano</label>
+    <select name="Plano">
       <option>Pag Pro</option>
       <option>Pag Super</option>
       <option>Pag Lucro</option>
     </select>
 
-    <label for="maquininha">Tipo de maquininha</label>
-    <select name="Maquininha" id="maquininha">
+    <label>Modelo</label>
+    <select name="Modelo">
       <option>PagMinizinha</option>
       <option>PagMini</option>
       <option>PagPlus</option>
@@ -112,57 +77,31 @@
       <option>PagSmart</option>
     </select>
 
-    <label for="formaPagamento">Forma de pagamento</label>
-    <select name="Forma de pagamento" id="formaPagamento">
+    <label>Forma de Pagamento</label>
+    <select name="Forma de Pagamento">
       <option>Dinheiro</option>
       <option>Pix</option>
       <option>Cartão</option>
     </select>
 
-    <button type="submit">Enviar</button>
+    <button type="submit">Enviar Cadastro</button>
   </form>
 
-  <div class="maquininhas">
-    <img src="pagminizinha.png" alt="PagMinizinha" class="maquininha-img">
-    <img src="pagmini.png" alt="PagMini" class="maquininha-img">
-    <img src="pagplus.png" alt="PagPlus" class="maquininha-img">
-    <img src="pagpro.png" alt="PagPro" class="maquininha-img">
-    <img src="pagsmart.png" alt="PagSmart" class="maquininha-img">
-  </div>
-
   <script>
-    $(document).ready(function () {
+    $(function(){
+      // Aplica máscaras
       $('#cpf').inputmask('999.999.999-99');
       $('#cnpj').inputmask('99.999.999/9999-99');
       $('#dataNascimento').inputmask('99/99/9999');
       $('#celular').inputmask('(99) 99999-9999');
       $('#cep').inputmask('99999-999');
 
-      $('#tipoPessoa').on('change', function () {
-        if (this.value === 'cnpj') {
-          $('#cnpjField').slideDown();
-          $('#cnpj').prop('required', true);
-        } else {
-          $('#cnpjField').slideUp();
-          $('#cnpj').prop('required', false);
-        }
+      // Quando o iframe receber a resposta do POST, mostramos alerta e resetamos o form
+      $('iframe[name="hidden_iframe"]').on('load', function(){
+        alert('Cadastro enviado com sucesso!');
+        $('#cadastroForm')[0].reset();
       });
-
-      $('#cadastroForm').on('submit', function (e) {
-        e.preventDefault();
-        const formData = {};
-        $(this).serializeArray().forEach(item => formData[item.name] = item.value);
-
-       fetch('https://script.google.com/macros/s/AKfycbzztHgLMzBB9zDCs4POVIv6b2YA4u3B0waHsWh0xRyrTGI8Cp0XQCKro3-UrWlAB9nT/exec', {
-  method: 'POST',
-  mode: 'no-cors',          // continua para não bloquear
-  body: new URLSearchParams(formData)  // envia como application/x-www-form-urlencoded
-})
-.then(() => {
-  alert('Cadastro enviado com sucesso!');
-  $('#cadastroForm')[0].reset();
-  $('#cnpjField').hide();
-})
-.catch(() => {
-  alert('Erro de conexão. Tente novamente.');
-});
+    });
+  </script>
+</body>
+</html>
