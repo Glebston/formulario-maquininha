@@ -18,11 +18,11 @@
 <body>
   <h1>Cadastro de Maquininha</h1>
 
-  <!-- iframe para submissão -->
+  <!-- iframe oculto para submissão sem recarga -->
   <iframe name="hidden_iframe" style="display:none;"></iframe>
 
   <form id="cadastroForm"
-        action="https://script.google.com/macros/s/AKfycbzztHgLMzBB9zDCs4POVIv6b2YA4u3B0waHsWh0xRyrTGI8Cp0XQCKro3-UrWlAB9nT/exec"
+        action="https://script.google.com/macros/s/AKfycbyJztp4f5qwKafBMW0CcBfqp76swXWLHhfcl9YNDpuK-aug6c4Qwt7wnIH1iShzIuVh/exec"
         method="post"
         target="hidden_iframe">
 
@@ -92,14 +92,14 @@
 
   <script>
     $(function(){
-      // Máscaras
+      // máscaras
       $('#cpf').inputmask('999.999.999-99');
       $('#cnpj').inputmask('99.999.999/9999-99');
       $('#dataNascimento').inputmask('99/99/9999');
       $('#celular').inputmask('(99) 99999-9999');
       $('#cep').inputmask('99999-999');
 
-      // Toggle CNPJ
+      // exibe campo CNPJ só quando selecionado
       $('#tipoPessoa').on('change', function(){
         if (this.value === 'CNPJ') {
           $('#cnpjContainer').removeClass('hidden');
@@ -110,7 +110,7 @@
         }
       });
 
-      // Alerta de sucesso via iframe load
+      // alerta de sucesso ao receber resposta no iframe
       $('iframe[name="hidden_iframe"]').on('load', function(){
         alert('Cadastro enviado com sucesso!');
         $('#cadastroForm')[0].reset();
