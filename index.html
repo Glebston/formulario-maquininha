@@ -12,33 +12,36 @@
     label { display:block; margin-top:10px; }
     input, select, button { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:none; box-sizing:border-box; }
     button { background:#a1db00; color:#000; cursor:pointer; margin-top:15px; }
+    .hidden { display:none; }
   </style>
 </head>
 <body>
   <h1>Cadastro de Maquininha</h1>
 
-  <!-- Iframe oculto para capturar a resposta do POST -->
+  <!-- iframe para submissão -->
   <iframe name="hidden_iframe" style="display:none;"></iframe>
 
   <form id="cadastroForm"
         action="https://script.google.com/macros/s/AKfycbzztHgLMzBB9zDCs4POVIv6b2YA4u3B0waHsWh0xRyrTGI8Cp0XQCKro3-UrWlAB9nT/exec"
         method="post"
         target="hidden_iframe">
-    
+
     <label>Nome completo</label>
     <input type="text" name="Nome completo" required>
 
     <label>Tipo de Cadastro</label>
-    <select name="Tipo de Cadastro">
-      <option>CPF</option>
-      <option>CNPJ</option>
+    <select id="tipoPessoa" name="Tipo de Cadastro">
+      <option value="CPF">CPF</option>
+      <option value="CNPJ">CNPJ</option>
     </select>
 
     <label>CPF</label>
     <input type="text" name="CPF" id="cpf" required>
 
-    <label>CNPJ</label>
-    <input type="text" name="CNPJ" id="cnpj">
+    <div id="cnpjContainer" class="hidden">
+      <label>CNPJ</label>
+      <input type="text" name="CNPJ" id="cnpj">
+    </div>
 
     <label>Data de Nascimento</label>
     <input type="text" name="Data de Nascimento" id="dataNascimento">
@@ -89,17 +92,29 @@
 
   <script>
     $(function(){
-      // Aplica máscaras
+      // Máscaras
       $('#cpf').inputmask('999.999.999-99');
       $('#cnpj').inputmask('99.999.999/9999-99');
       $('#dataNascimento').inputmask('99/99/9999');
       $('#celular').inputmask('(99) 99999-9999');
       $('#cep').inputmask('99999-999');
 
-      // Quando o iframe receber a resposta do POST, mostramos alerta e resetamos o form
+      // Toggle CNPJ
+      $('#tipoPessoa').on('change', function(){
+        if (this.value === 'CNPJ') {
+          $('#cnpjContainer').removeClass('hidden');
+          $('#cnpj').prop('required', true);
+        } else {
+          $('#cnpjContainer').addClass('hidden');
+          $('#cnpj').prop('required', false);
+        }
+      });
+
+      // Alerta de sucesso via iframe load
       $('iframe[name="hidden_iframe"]').on('load', function(){
         alert('Cadastro enviado com sucesso!');
         $('#cadastroForm')[0].reset();
+        $('#cnpjContainer').addClass('hidden');
       });
     });
   </script>
