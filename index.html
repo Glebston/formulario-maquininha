@@ -1,121 +1,164 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cadastro Maquininha</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - PagLucro</title>
   <style>
-    body { font-family: Arial; background: #010729; color: #fff; padding: 20px; }
-    form { background: #1a3950; padding: 20px; border-radius: 15px; max-width:600px; margin:auto; }
-    label { display:block; margin-top:10px; }
-    input, select, button { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:none; box-sizing:border-box; }
-    button { background:#a1db00; color:#000; cursor:pointer; margin-top:15px; }
-    .hidden { display:none; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #010729;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #1a3950;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #a1db00;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input[type="submit"] {
+      background: #a1db00;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background: #6e862d;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 15px;
+      padding: 10px;
+      background: #a1db00;
+      color: #000;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <h1>Cadastro de Maquininha</h1>
+  <div class="container">
+    <h2>Cadastro - PagLucro</h2>
+    <form id="cadastroForm">
+      <label>Nome completo</label>
+      <input type="text" name="nome" required>
 
-  <!-- iframe oculto para submissão sem recarga -->
-  <iframe name="hidden_iframe" style="display:none;"></iframe>
+      <label>Tipo de Cadastro</label>
+      <select name="tipoCadastro" id="tipoCadastro" required>
+        <option value="">Selecione</option>
+        <option value="CPF">CPF</option>
+        <option value="CNPJ">CNPJ</option>
+      </select>
 
-  <form id="cadastroForm"
-        action="https://script.google.com/macros/s/AKfycbyJztp4f5qwKafBMW0CcBfqp76swXWLHhfcl9YNDpuK-aug6c4Qwt7wnIH1iShzIuVh/exec"
-        method="post"
-        target="hidden_iframe">
+      <div id="cpfField">
+        <label>CPF</label>
+        <input type="text" name="cpf">
+      </div>
 
-    <label>Nome completo</label>
-    <input type="text" name="Nome completo" required>
+      <div id="cnpjField" style="display:none;">
+        <label>CNPJ</label>
+        <input type="text" name="cnpj">
+      </div>
 
-    <label>Tipo de Cadastro</label>
-    <select id="tipoPessoa" name="Tipo de Cadastro">
-      <option value="CPF">CPF</option>
-      <option value="CNPJ">CNPJ</option>
-    </select>
+      <label>Data de Nascimento</label>
+      <input type="date" name="dataNascimento" required>
 
-    <label>CPF</label>
-    <input type="text" name="CPF" id="cpf" required>
+      <label>Celular</label>
+      <input type="tel" name="celular" required>
 
-    <div id="cnpjContainer" class="hidden">
-      <label>CNPJ</label>
-      <input type="text" name="CNPJ" id="cnpj">
+      <label>Email</label>
+      <input type="email" name="email" required>
+
+      <label>Com o que você trabalha</label>
+      <input type="text" name="trabalho">
+
+      <label>Nome da rua e nº</label>
+      <input type="text" name="endereco">
+
+      <label>Bairro</label>
+      <input type="text" name="bairro">
+
+      <label>CEP</label>
+      <input type="text" name="cep">
+
+      <label>Plano</label>
+      <input type="text" name="plano" value="PagLucro" readonly>
+
+      <label>Modelo</label>
+      <input type="text" name="modelo">
+
+      <label>Forma de Pagamento</label>
+      <input type="text" name="formaPagamento">
+
+      <input type="submit" value="Enviar">
+    </form>
+
+    <div class="success-message" id="successMessage">
+      ✅ Dados enviados com sucesso!
     </div>
-
-    <label>Data de Nascimento</label>
-    <input type="text" name="Data de Nascimento" id="dataNascimento">
-
-    <label>Celular</label>
-    <input type="text" name="Celular" id="celular">
-
-    <label>Email</label>
-    <input type="email" name="Email" required>
-
-    <label>Com o que você trabalha</label>
-    <input type="text" name="Com o que você trabalha" required>
-
-    <label>Nome da rua e nº</label>
-    <input type="text" name="Nome da rua e nº">
-
-    <label>Bairro</label>
-    <input type="text" name="Bairro">
-
-    <label>CEP</label>
-    <input type="text" name="CEP" id="cep">
-
-    <label>Plano</label>
-    <select name="Plano">
-      <option>Pag Pro</option>
-      <option>Pag Super</option>
-      <option>Pag Lucro</option>
-    </select>
-
-    <label>Modelo</label>
-    <select name="Modelo">
-      <option>PagMinizinha</option>
-      <option>PagMini</option>
-      <option>PagPlus</option>
-      <option>PagPro</option>
-      <option>PagSmart</option>
-    </select>
-
-    <label>Forma de Pagamento</label>
-    <select name="Forma de Pagamento">
-      <option>Dinheiro</option>
-      <option>Pix</option>
-      <option>Cartão</option>
-    </select>
-
-    <button type="submit">Enviar Cadastro</button>
-  </form>
+  </div>
 
   <script>
-    $(function(){
-      // máscaras
-      $('#cpf').inputmask('999.999.999-99');
-      $('#cnpj').inputmask('99.999.999/9999-99');
-      $('#dataNascimento').inputmask('99/99/9999');
-      $('#celular').inputmask('(99) 99999-9999');
-      $('#cep').inputmask('99999-999');
+    document.getElementById("tipoCadastro").addEventListener("change", function() {
+      let cnpjField = document.getElementById("cnpjField");
+      if (this.value === "CNPJ") {
+        cnpjField.style.display = "block";
+      } else {
+        cnpjField.style.display = "none";
+      }
+    });
 
-      // exibe campo CNPJ só quando selecionado
-      $('#tipoPessoa').on('change', function(){
-        if (this.value === 'CNPJ') {
-          $('#cnpjContainer').removeClass('hidden');
-          $('#cnpj').prop('required', true);
-        } else {
-          $('#cnpjContainer').addClass('hidden');
-          $('#cnpj').prop('required', false);
-        }
-      });
+    document.getElementById("cadastroForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-      // alerta de sucesso ao receber resposta no iframe
-      $('iframe[name="hidden_iframe"]').on('load', function(){
-        alert('Cadastro enviado com sucesso!');
-        $('#cadastroForm')[0].reset();
-        $('#cnpjContainer').addClass('hidden');
-      });
+      let formData = new FormData(this);
+
+      fetch("https://script.google.com/macros/s/AKfycbyJztp4f5qwKafBMW0CcBfqp76swXWLHhfcl9YNDpuK-aug6c4Qwt7wnIH1iShzIuVh/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("successMessage").style.display = "block";
+        this.reset();
+      })
+      .catch(error => console.error("Erro!", error.message));
     });
   </script>
 </body>
